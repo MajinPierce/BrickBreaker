@@ -1,6 +1,8 @@
 package com.piercebeckett.BrickBreaker;
 
+import com.piercebeckett.BrickBreaker.action.Gameplay;
 import javafx.application.Application;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -10,17 +12,17 @@ public class Main extends Application{
 
     @Override
     public void start(Stage stage) {
-        String javaVersion = System.getProperty("java.version");
-        String javafxVersion = System.getProperty("javafx.version");
-        Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        Scene scene = new Scene(new StackPane(l), 640, 480);
+        Group root = new Group();
+        Scene scene = new Scene(root, 640, 480);
+        stage.setTitle("Brick Breaker");
         stage.setScene(scene);
+        stage.setResizable(false);
+        new Gameplay(root);
         stage.show();
     }
 
     public static void main(String[] args){
-        System.out.println("test");
-        launch();
+        launch(args);
     }
 
 }

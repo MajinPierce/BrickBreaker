@@ -1,17 +1,26 @@
 package com.piercebeckett.BrickBreaker.model;
 
-public class Paddle {
-    static final int BASE_SPEED = 50;
-    static final int BASE_LENGTH = 50;
-    static final int STARTING_X_POS = 0;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
-    private int length;
-    private int xPos;
-    private int speed;
+public class Paddle extends Rectangle {
+    static final double BASE_SPEED = 50;
+    static final double BASE_WIDTH= 50;
+    static final double HEIGHT = 20;
+    static final double Y_OFFSET = 20;
+    static final double STARTING_X = 320 - (BASE_WIDTH / 2);
+    static final double STARTING_Y = 480 - HEIGHT - Y_OFFSET;
+
+    private double speed;
 
     public Paddle(){
-        resetLocation();
-        resetLength();
+
+        super(
+                STARTING_X,
+                STARTING_Y,
+                BASE_WIDTH,
+                HEIGHT
+        );
         resetSpeed();
     }
 
@@ -21,12 +30,16 @@ public class Paddle {
 
     public void resetSpeed(){this.speed = BASE_SPEED;}
 
-    public void increaseLength(){this.length += 10;}
+    public void increaseWidth(){setWidth(getWidth() + 10);}
 
-    public void decreaseLength(){this.length -= 10;}
+    public void decreaseWidth(){setWidth(getWidth() - 10);}
 
-    public void resetLength(){this.length = BASE_LENGTH;}
+    public void resetWidth(){setWidth(BASE_WIDTH);}
 
-    public void resetLocation(){this.xPos = STARTING_X_POS;}
+    public void resetPosition(){setX(STARTING_X);}
+
+    public double getSpeed() {return this.speed;}
+
+    public void setSpeed(double speed) {this.speed = speed;}
 
 }
