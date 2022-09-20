@@ -1,0 +1,15 @@
+# Default ignored files
+/shelf/
+/out/
+
+.idea/sonarlint
+
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/vcs.xml
+.idea/uiDesigner.xml
+
+*.iws
+
+/target/
+*/target/**
