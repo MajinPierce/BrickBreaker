@@ -7,7 +7,7 @@ import static com.piercebeckett.BrickBreaker.Main.WINDOW_HEIGHT;
 import static com.piercebeckett.BrickBreaker.Main.WINDOW_WIDTH;
 
 public class Paddle extends Rectangle {
-    static final double BASE_SPEED = 2;
+    static final double BASE_SPEED = 3;
     static final double BASE_WIDTH= 80;
     static final double HEIGHT = 20;
     static final double Y_OFFSET = 20;
