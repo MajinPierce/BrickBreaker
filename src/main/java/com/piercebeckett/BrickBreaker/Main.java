@@ -1,5 +1,6 @@
 package com.piercebeckett.BrickBreaker;
 
+import com.piercebeckett.BrickBreaker.model.Ball;
 import com.piercebeckett.BrickBreaker.model.Paddle;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -15,10 +16,11 @@ import javafx.stage.Stage;
 public class Main extends Application{
 
     private Paddle paddle = new Paddle();
+    private Ball ball = new Ball();
     private double paddleDx = 0;
 
-    private double windowWidth = 640;
-    private double windowHeight = 480;
+    public static final double WINDOW_WIDTH = 640;
+    public static final double WINDOW_HEIGHT = 480;
 
     AnimationTimer timer = new AnimationTimer() {
         @Override
@@ -31,9 +33,29 @@ public class Main extends Application{
             if(paddle.getX() < 0){
                 paddle.setX(0);
             }
+            else if(paddle.getX() > (WINDOW_WIDTH - paddle.getWidth())){
+                paddle.setX(WINDOW_WIDTH - paddle.getWidth());
+            }
 
-            if(paddle.getX() > (windowWidth - paddle.getWidth())){
-                paddle.setX(windowWidth - paddle.getWidth());
+            ball.setCenterX(ball.getCenterX() + ball.getxVelocity());
+            ball.setCenterY(ball.getCenterY() + ball.getyVelocity());
+
+            if((ball.getCenterX() - ball.getRadius()) < 0) {
+                ball.setxVelocity(ball.getxVelocity() * -1);
+                ball.setCenterX(ball.getRadius());
+            }
+            else if((ball.getCenterX() + ball.getRadius()) > WINDOW_WIDTH){
+                ball.setxVelocity(ball.getxVelocity() * -1);
+                ball.setCenterX(WINDOW_WIDTH - ball.getRadius());
+            }
+
+            if((ball.getCenterY() - ball.getRadius()) < 0) {
+                ball.setyVelocity(ball.getyVelocity() * -1);
+                ball.setCenterY(ball.getRadius());
+            }
+            else if((ball.getCenterY() + ball.getRadius()) > WINDOW_HEIGHT){
+                ball.setyVelocity(ball.getyVelocity() * -1);
+                ball.setCenterY(WINDOW_HEIGHT - ball.getRadius());
             }
         }
     };
@@ -41,19 +63,19 @@ public class Main extends Application{
     @Override
     public void start(Stage stage) {
         Group root = new Group();
-        Scene scene = new Scene(root, windowWidth, windowHeight);
+        Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
         stage.setTitle("Brick Breaker");
         stage.setScene(scene);
         stage.setResizable(false);
 
-        Canvas canvas = new Canvas(windowWidth, windowHeight);
+        Canvas canvas = new Canvas(WINDOW_WIDTH, WINDOW_HEIGHT);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        canvas.setFocusTraversable(true);
+        canvas.setFocusTraversable(false);
         scene.setOnKeyPressed(keyPressed);
         scene.setOnKeyReleased(keyReleased);
 
-        root.getChildren().add(paddle);
+        root.getChildren().addAll(paddle, ball);
 
         final long startNanoTime = System.nanoTime();
 

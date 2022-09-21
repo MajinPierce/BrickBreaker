@@ -3,13 +3,16 @@ package com.piercebeckett.BrickBreaker.model;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import static com.piercebeckett.BrickBreaker.Main.WINDOW_HEIGHT;
+import static com.piercebeckett.BrickBreaker.Main.WINDOW_WIDTH;
+
 public class Paddle extends Rectangle {
     static final double BASE_SPEED = 2;
     static final double BASE_WIDTH= 80;
     static final double HEIGHT = 20;
     static final double Y_OFFSET = 20;
-    static final double STARTING_X = 320 - (BASE_WIDTH / 2);
-    static final double STARTING_Y = 480 - HEIGHT - Y_OFFSET;
+    static final double STARTING_X = (WINDOW_WIDTH/2) - (BASE_WIDTH / 2);
+    static final double STARTING_Y = WINDOW_HEIGHT - HEIGHT - Y_OFFSET;
 
     private double speed;
 
