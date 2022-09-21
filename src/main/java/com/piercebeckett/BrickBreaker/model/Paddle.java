@@ -4,8 +4,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class Paddle extends Rectangle {
-    static final double BASE_SPEED = 50;
-    static final double BASE_WIDTH= 50;
+    static final double BASE_SPEED = 2;
+    static final double BASE_WIDTH= 80;
     static final double HEIGHT = 20;
     static final double Y_OFFSET = 20;
     static final double STARTING_X = 320 - (BASE_WIDTH / 2);
