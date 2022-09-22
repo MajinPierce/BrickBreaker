@@ -1,6 +1,7 @@
 package com.piercebeckett.BrickBreaker;
 
 import com.piercebeckett.BrickBreaker.model.Ball;
+import com.piercebeckett.BrickBreaker.model.Brick;
 import com.piercebeckett.BrickBreaker.model.Paddle;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -12,6 +13,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+
+import java.util.ArrayList;
 
 public class Main extends Application{
 
@@ -22,6 +26,8 @@ public class Main extends Application{
     public static final double WINDOW_WIDTH = 640;
     public static final double WINDOW_HEIGHT = 480;
     public static final double epsilon = 1;
+    static final int NUMBER_OF_ROWS = 5;
+    static final double BRICK_GAP = 2;
 
     AnimationTimer timer = new AnimationTimer() {
         @Override
@@ -90,7 +96,26 @@ public class Main extends Application{
 
         root.getChildren().addAll(paddle, ball);
 
-        final long startNanoTime = System.nanoTime();
+        ArrayList<Brick> bricks = new ArrayList<>();
+        int columns = (int) Math.floor(WINDOW_WIDTH / (Brick.BASE_WIDTH + BRICK_GAP));
+        System.out.println("columns: " + columns);
+        double buffer = (WINDOW_WIDTH - ((Brick.BASE_WIDTH + BRICK_GAP) * columns)) + 2*BRICK_GAP;
+        System.out.println("buffer: " + buffer);
+
+        for(int i=0; i<NUMBER_OF_ROWS; i++){
+            for(int j=0; j<columns; j++){
+                bricks.add(new Brick(
+                        (j * Brick.BASE_WIDTH + buffer + j),
+                        (i * Brick.BASE_HEIGHT + buffer + i)
+                ));
+                //System.out.println("x: " + (j * Brick.BASE_WIDTH + buffer + j));
+                //System.out.println("y: " + (i * Brick.BASE_HEIGHT + buffer + i));
+            }
+        }
+
+        for(Brick brick : bricks){
+            root.getChildren().add(brick);
+        }
 
         timer.start();
         stage.show();
